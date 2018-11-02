@@ -1,0 +1,5 @@
+V:创建BaseActivty 
+	功能方法：onCreate()初始化共用类（如黄油刀） 初始化视图，设置布局等， onDestroy(); 注销公共类（如黄油刀）
+  创建BaseFragment  onCreateView() 初始化共用类（如黄油刀），初始化视图设置布局等。onDestroyView 注销公共类；  
+  创建BaseView  
+P: BasePresenter 
