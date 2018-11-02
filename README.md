@@ -1,1 +1,1 @@
-# MVPDemoStructure
+# DesignPatternsMVPDemo
