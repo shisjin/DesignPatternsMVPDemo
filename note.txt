@@ -28,6 +28,7 @@ P: BasePresenter  <V extends BaseView>  功能方法： 绑定view attachView(V 
 
 
 
+
 	
 
 
