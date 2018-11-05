@@ -1,5 +1,62 @@
-V:创建BaseActivty 
+MVP:
+View: 对应于Activity，负责View的绘制以及与用户交互
+Model: 依然是业务逻辑和实体模型
+Presenter: 负责完成View于Model间的交互
+
+Model与View之间的交互由Presenter完成，还有一点就是Presenter与View之间的交互是通过接口的
+
+      ← 
+View  →    Presenter 
+            ↓        
+		   Model
+
+MVP优势:
+1.代码简洁。此处的简洁是逻辑的简洁，而不是代码本身 举个栗子;
+2.降低耦合，方便维护。MVP的使用，使Activity中的网络请求剥离出来 成为model、presenter，model只负责网络的请求、pesenter负责处理请求网络后的数据处理：加载中 成功 or 失败 取消加载；最后View进行界面的展示。 
+MVP缺点：
+MVP在实现代码简洁的同时，额外增加了大量的接口、类，不方便进行管理。
+改进：
+定义一个Contract类将Model、View、Presenter 进行约束管理，方便后期类的查找、维护。
+
+V:创建BaseActivity
 	功能方法：onCreate()初始化共用类（如黄油刀） 初始化视图，设置布局等， onDestroy(); 注销公共类（如黄油刀）
-  创建BaseFragment  onCreateView() 初始化共用类（如黄油刀），初始化视图设置布局等。onDestroyView 注销公共类；  
-  创建BaseView  
-P: BasePresenter 
+ BaseMvpActivity：<T extends  BasePresenter > 继承BaseActivity 实现BaseView类，解除绑定View、实现bindAutoDispose方法绑定生命周期 防止MVP内存泄漏；
+   创建BaseFragment：  onCreateView() 初始化共用类（如黄油刀），初始化视图设置布局等。onDestroyView 注销公共类；
+  BaseMvpFragment：<T extends BasePresenter>继承BaseFragment 实现BaseView类，解除绑定View
+  创建BaseView  加载中、隐藏加载、获取数据失败、成功 、绑定生命周期
+P: BasePresenter  <V extends BaseView>  功能方法： 绑定view attachView(V mView) 、 解绑view detachView()、判断是否绑定view isViewAttached()。
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+参考：
+https://www.jianshu.com/p/ae0b21d3238a
+https://github.com/RookieExaminer/MvpDemo
