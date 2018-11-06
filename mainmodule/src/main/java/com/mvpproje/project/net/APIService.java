@@ -15,7 +15,7 @@ import retrofit2.http.POST;
 public interface APIService {
 
 
-    @FormUrlEncoded
+    @FormUrlEncoded//作用：表示发送form-encoded的数据,每个键值对需要用@Filed来注解键名，随后的对象需要提供值。
     @POST("user/login")
     Flowable<BaseObjectBean<LoginBean>> login(@Field("username") String username,
                                               @Field("password") String password);

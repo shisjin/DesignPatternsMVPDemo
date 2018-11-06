@@ -38,6 +38,12 @@ public class BaseObjectBean<T> {
         this.resule = resule;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "BaseObjectBean{" +
+                "errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                ", resule=" + resule +
+                '}';
+    }
 }

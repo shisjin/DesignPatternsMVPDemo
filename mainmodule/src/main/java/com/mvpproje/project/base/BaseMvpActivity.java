@@ -2,7 +2,6 @@ package com.mvpproje.project.base;
 
 import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -15,8 +14,9 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 public abstract class BaseMvpActivity<T extends  BasePresenter > extends BaseActivity implements BaseView {
     protected  T mPresenter;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 

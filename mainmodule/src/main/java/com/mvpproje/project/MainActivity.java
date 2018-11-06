@@ -1,50 +1,82 @@
 package com.mvpproje.project;
 
+
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.widget.Toast;
 
-import com.mvpproje.shijin.project.R;
+import com.mvpproje.project.base.BaseMvpActivity;
+import com.mvpproje.project.bean.BaseObjectBean;
+import com.mvpproje.project.bean.LoginBean;
+import com.mvpproje.project.contract.MainContract;
+import com.mvpproje.project.presenter.MainPresenter;
+import com.mvpproje.project.util.ProgressDialog;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import butterknife.BindView;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
-private boolean isChecked;
+public class MainActivity extends BaseMvpActivity<MainPresenter>implements MainContract.View {
+    @BindView(R.id.et_username_login)
+    TextInputEditText etUsernameLogin;
+    @BindView(R.id.et_password_login)
+    TextInputEditText etPasswordLogin;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ((CheckBox)findViewById(R.id.checkbox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MainActivity.this.isChecked=isChecked;
-            }
-        });
     }
 
-    public void changtext(View view) {
-        String textStr = ((TextView) findViewById(R.id.text)).getText().toString();
-        if (isChecked){
-            textStr=replaceBlank(textStr);
-        }else {
-            textStr= ((TextView) findViewById(R.id.text)).getText().toString();
+    /**
+     * @return 帐号
+     */
+    private String getUsername() {
+        return etUsernameLogin.getText().toString().trim();
+    }
+
+    /**
+     * @return 密码
+     */
+    private String getPassword() {
+        return etPasswordLogin.getText().toString().trim();
+    }
+
+    public void showLoading() {
+        ProgressDialog.getInstance().show(this);
+    }
+
+    @Override
+    public void hideLoading() {
+        ProgressDialog.getInstance().dismiss();
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess(BaseObjectBean<LoginBean> bean) {
+        Toast.makeText(this, bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void initView() {
+          mPresenter= new MainPresenter();
+          mPresenter.attachView(this);
+    }
+
+    @Override
+    protected int getLayoutInt() {
+        return R.layout.activity_main;
+    }
+
+    @OnClick(R.id.btn_signin_login)
+    public  void onViewClicked(){
+        if (getUsername().isEmpty()||getPassword().isEmpty()){
+            Toast.makeText(this, "帐号密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }
-        ((TextView) findViewById(R.id.chang_text)).setText(textStr);
-
+        mPresenter.login(getUsername(),getPassword());
     }
-
-    public  String replaceBlank(String str) {
-        String dest = "";
-        if (str!=null) {
-            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-            Matcher m = p.matcher(str);
-            dest = m.replaceAll("");
-        }
-        return dest;
-    }
-
 }

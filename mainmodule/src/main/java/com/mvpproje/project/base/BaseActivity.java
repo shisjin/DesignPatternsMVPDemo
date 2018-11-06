@@ -1,7 +1,6 @@
 package com.mvpproje.project.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
@@ -16,8 +15,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder unbinder;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(getLayoutInt());
         unbinder = ButterKnife.bind(this);
         initView();

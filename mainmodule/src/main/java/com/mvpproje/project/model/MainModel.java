@@ -3,6 +3,7 @@ package com.mvpproje.project.model;
 import com.mvpproje.project.bean.BaseObjectBean;
 import com.mvpproje.project.bean.LoginBean;
 import com.mvpproje.project.contract.MainContract;
+import com.mvpproje.project.net.RetrofitClient;
 
 import io.reactivex.Flowable;
 
@@ -13,7 +14,6 @@ import io.reactivex.Flowable;
 public class MainModel implements MainContract.Model {
     @Override
     public Flowable<BaseObjectBean<LoginBean>> login(String username, String password) {
-
-        return null;
+        return RetrofitClient.getInstance().getApi().login(username,password);
     }
 }
