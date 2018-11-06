@@ -59,5 +59,6 @@ P: BasePresenter  <V extends BaseView>  功能方法： 绑定view attachView(V 
 
 
 参考：
+https://github.com/BaronZ88/Retrofit2-FastJson-Converter
 https://www.jianshu.com/p/ae0b21d3238a
 https://github.com/RookieExaminer/MvpDemo
