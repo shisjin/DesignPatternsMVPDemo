@@ -79,4 +79,17 @@ public class LoginBean {
     public void setCollectIds(List<?> collectIds) {
         this.collectIds = collectIds;
     }
+
+    @Override
+    public String toString() {
+        return "LoginBean{" +
+                "email='" + email + '\'' +
+                ", icon='" + icon + '\'' +
+                ", id=" + id +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                ", username='" + username + '\'' +
+                ", collectIds=" + collectIds +
+                '}';
+    }
 }
