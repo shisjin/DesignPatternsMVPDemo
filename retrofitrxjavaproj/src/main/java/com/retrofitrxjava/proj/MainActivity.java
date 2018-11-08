@@ -22,7 +22,7 @@ public class MainActivity  extends AppCompatActivity {
 
     @OnClick(R.id.get_data)
     public void  getData(){
-        RxJavaHelper.zip();
+        RxJavaHelper.window();
     }
 
 
